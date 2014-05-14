@@ -2,6 +2,7 @@ package source;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Allegro {
@@ -14,8 +15,14 @@ public class Allegro {
 		}
 		return doc;
 	}
+	
 	public static Elements getCategoriesFromDocument(Document document){
 		return document.getElementsByClass("category");
 	}
+	
+	public static String getCategoryName(Element element){
+		return element.getElementsByTag("h3").text();
+	}
+	
 	
 }
