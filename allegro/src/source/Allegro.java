@@ -28,27 +28,58 @@ public class Allegro {
 		return element.getElementsByTag("li");
 	}
 	
-	public static String parseDocumentBeforePrizeToString(Element element){
+	public static String parseDocumentBeforeReductionPriceToString(Element element){
 		return element.getElementsByTag("del").text();
 	}
 	
-	public static String parseDocumentAfterPrizeToString(Element element){
-		return element.getElementsByClass("bargains-main-color").text();
+	public static String parseDocumentAfterReductionPriceToString(Element element){
+		return element.select("span.price.bargains-main-color").text();
 	}
 	
-	public static double parseStringPrizeToDouble(String prize){
-		if(prize.endsWith("zł")){
-			prize = prize.substring(0,prize.length()-2);
+	public static double parseStringPriceToDouble(String price){
+		if(price.isEmpty()){
+			return 0;
 		}
-		if(prize.indexOf(',') != -1){
-			prize = prize.substring(0, prize.indexOf(',')) + "." + prize.substring(prize.indexOf(',')+1,prize.length());
+		//remove space and &nbsp
+		price = price.replaceAll("\\s+", "").replace("\u00a0","");
+		if(price.endsWith("zł")){
+			price = price.substring(0,price.length()-2);
 		}
-			return Double.parseDouble(prize.replaceAll(" ", ""));
+		if(price.indexOf(',') != -1){
+			price = price.substring(0, price.indexOf(',')) + "." + price.substring(price.indexOf(',')+1,price.length());
+		}
+			return Double.parseDouble(price);
 	}
 	
-	public static double getDifferenceBetweenPrizes(double first, double second){
+	public static double getDifferenceBetweenPrices(double first, double second){
 		return first-second;
 	}
+	public static void getAndPrintDataFromWebsite(){
+		//get all categories from allegro
+		double sum = 0;
+		boolean isSomethingAdded = false;
+		Elements elements = getCategoriesFromDocument(getDataFromAllegroWebsite());
+		//for each category print it header and sum up profits from prices reductions
+		for(Element element : elements){
+			if(!getCategoryName(element).isEmpty()){
+				System.out.print(getCategoryName(element)+": ");
+			}
+			Elements categoryElements = getItemsFromCategory(element);
+			sum = 0;
+			for(Element categoryElement : categoryElements){
+				if(!categoryElement.text().isEmpty()){
+					sum += getDifferenceBetweenPrices(parseStringPriceToDouble(parseDocumentBeforeReductionPriceToString(categoryElement)),
+							                          parseStringPriceToDouble(parseDocumentAfterReductionPriceToString(categoryElement)));
+					isSomethingAdded = true;
+				}
+			}
+			if(isSomethingAdded){
+				System.out.println(sum);
+			}
+			
+		}
+	}
+	
 	
 	
 }
