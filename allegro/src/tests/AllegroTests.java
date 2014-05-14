@@ -49,7 +49,7 @@ public class AllegroTests {
 				+ "1 499,00 zł</span><del>1 899,00 zł</del></div></li><li class=''></li><li class=''></li></div></body></html>";
 		Document doc = Jsoup.parse(html);
 		Element element = Allegro.getCategoriesFromDocument(doc).first();
-		Assert.assertEquals("method should return proper number of li elements", "1 899,00 zł",Allegro.parseDocumentBeforePrizeToString(element));
+		Assert.assertEquals("method should return proper before reduction prize", "1 899,00 zł",Allegro.parseDocumentBeforePrizeToString(element));
 	}
 	
 	@Test
@@ -59,7 +59,13 @@ public class AllegroTests {
 				+ "<del>1 899,00 zł</del></div></li><li class=''></li><li class=''></li></div></body></html>";
 		Document doc = Jsoup.parse(html);
 		Element element = Allegro.getCategoriesFromDocument(doc).first();
-		Assert.assertEquals("method should return proper number of li elements", "1 499,00 zł", Allegro.parseDocumentAfterPrizeToString(element));
+		Assert.assertEquals("method should return proper after reduction prize", "1 499,00 zł", Allegro.parseDocumentAfterPrizeToString(element));
+	}
+	@Test
+	public void testParsingStringPrizeToDouble(){
+		String prize = "1 499,00 zł";
+		Assert.assertEquals("method should parse String prize to double", 1499.00, Allegro.parseStringPrizeToDouble(prize), 0.1);
+		
 	}
 
 }

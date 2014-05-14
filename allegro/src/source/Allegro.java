@@ -36,5 +36,15 @@ public class Allegro {
 		return element.getElementsByClass("bargains-main-color").text();
 	}
 	
+	public static double parseStringPrizeToDouble(String prize){
+		if(prize.endsWith("zł")){
+			prize = prize.substring(0,prize.length()-2);
+		}
+		if(prize.indexOf(',') != -1){
+			prize = prize.substring(0, prize.indexOf(',')) + "." + prize.substring(prize.indexOf(',')+1,prize.length());
+		}
+			return Double.parseDouble(prize.replaceAll(" ", ""));
+	}
+	
 	
 }
