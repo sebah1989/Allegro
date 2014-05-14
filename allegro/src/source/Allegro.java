@@ -2,6 +2,7 @@ package source;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class Allegro {
 	public static Document getDataFromAllegroWebsite(){
@@ -12,6 +13,9 @@ public class Allegro {
 			System.out.println("There was an error in connection with allegro!");
 		}
 		return doc;
+	}
+	public static Elements getCategoriesFromDocument(Document document){
+		return document.getElementsByClass("category");
 	}
 	
 }
