@@ -28,5 +28,13 @@ public class Allegro {
 		return element.getElementsByTag("li");
 	}
 	
+	public static String parseDocumentBeforePrizeToString(Element element){
+		return element.getElementsByTag("del").text();
+	}
+	
+	public static String parseDocumentAfterPrizeToString(Element element){
+		return element.getElementsByClass("bargains-main-color").text();
+	}
+	
 	
 }
