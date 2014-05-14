@@ -24,5 +24,9 @@ public class Allegro {
 		return element.getElementsByTag("h3").text();
 	}
 	
+	public static Elements getItemsFromCategory(Element element){
+		return element.getElementsByTag("li");
+	}
+	
 	
 }

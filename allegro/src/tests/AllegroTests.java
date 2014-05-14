@@ -4,7 +4,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import source.Allegro;
@@ -32,6 +31,16 @@ public class AllegroTests {
 		Document doc = Jsoup.parse(html);
 		Element element = Allegro.getCategoriesFromDocument(doc).first();
 		Assert.assertEquals("method should return proper category name", Allegro.getCategoryName(element), "Nowe oferty");
+	}
+	
+	@Test
+	public void testGetItemsFromCategory(){
+		String html = "<html><head><title>Some title</title></head><body><div class='category' data-category-main='false' data-category-id='100008'> + "
+				+ "<h3>Nowe oferty</h3><li class=''></li><li class=''></li><li class=''></li></div><div class='category' data-category-main='false' data-category-id='100008'> + "
+				+ "<h3>Nowe oferty</h3><li class=''></li><li class=''></li><li class=''></li></div></body></html>";
+		Document doc = Jsoup.parse(html);
+		Element element = Allegro.getCategoriesFromDocument(doc).first();
+		Assert.assertEquals("method should return proper number of li elements", Allegro.getItemsFromCategory(element).size(), 3);
 	}
 
 }
