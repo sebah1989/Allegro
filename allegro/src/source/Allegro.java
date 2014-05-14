@@ -46,5 +46,9 @@ public class Allegro {
 			return Double.parseDouble(prize.replaceAll(" ", ""));
 	}
 	
+	public static double getDifferenceBetweenPrizes(double first, double second){
+		return first-second;
+	}
+	
 	
 }

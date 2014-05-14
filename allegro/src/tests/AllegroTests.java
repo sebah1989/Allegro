@@ -67,5 +67,12 @@ public class AllegroTests {
 		Assert.assertEquals("method should parse String prize to double", 1499.00, Allegro.parseStringPrizeToDouble(prize), 0.1);
 		
 	}
+	@Test
+	public void testCheckingDifferenceBeewtenTwoPrizes(){
+		double prizeBefore = 1899.0;
+		double prizeAfter = 1499.0;
+		Assert.assertEquals("method should return proper difference", 400.00, Allegro.getDifferenceBetweenPrizes(prizeBefore, prizeAfter), 0.1);
+		
+	}
 
 }
