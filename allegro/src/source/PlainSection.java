@@ -13,15 +13,13 @@ public class PlainSection extends Section{
 		this.notConvertedCategories = section.getElementsByClass("category");
 		convertCategories();
 	}
-	public void convertCategories(){
+	
+	protected void convertCategories(){
 		for(Element element : notConvertedCategories){
 			categories.add(new PlainCategory(element));
 		}
 	}
-	
-	public ArrayList<PlainCategory> getCategories() {
-		return categories;
-	}
+
 	public void printSection(){
 		for(PlainCategory category : categories){
 			category.printCategory();

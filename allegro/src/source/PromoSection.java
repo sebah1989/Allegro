@@ -12,22 +12,14 @@ public class PromoSection extends Section {
 		this.section = document.select("section.category.promotion-category.separator-bottom.transform").first();
 		convertCategories();
 	}
-	public void convertCategories(){
+	protected void convertCategories(){
 		items.add(new PromoCategory(section, "Nowe okazje"));
 	}
-	public Element getSection(){
-		return section;
-	}
+	
 	public void printSection(){
 		for(PromoCategory category : items){
 			category.printCategory();
 		}
 	}
-	
-	public ArrayList<PromoCategory> getItems() {
-		return items;
-	}
-
 	private ArrayList<PromoCategory> items;
-	
 }

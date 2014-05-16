@@ -7,6 +7,7 @@ public class Manager {
 	public Manager(){
 		getDataFromAllegroWebsite();
 	}
+	
 	private void getDataFromAllegroWebsite(){
 		Document doc = null;
 		try {
@@ -16,6 +17,7 @@ public class Manager {
 		}
 		this.document =  doc;
 	}
+	
 	public void start(){
 		PromoSection promosection = new PromoSection(document);
 		promosection.printSection();

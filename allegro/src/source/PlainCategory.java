@@ -6,12 +6,10 @@ import org.jsoup.nodes.Element;
 
 public class PlainCategory extends Category {
 	public PlainCategory(Element element){
+		super(element);
 		items = new ArrayList<PlainItem>();
-		this.notConvertedItems = element.getElementsByTag("li");
 		this.header = getCategoryHeader(element);
 		convertItems();
-		
-		
 	}
 	
 	protected void convertItems(){

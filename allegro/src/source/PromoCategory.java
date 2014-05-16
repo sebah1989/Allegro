@@ -1,15 +1,13 @@
 package source;
 
 import java.util.ArrayList;
-
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 public class PromoCategory extends Category {
 	public PromoCategory(Element element, String header){
+		super(element);
 		items = new ArrayList<PromoItem>();
 		this.header = header;
-		this.notConvertedItems = element.getElementsByTag("li");
 		convertItems();
 	}
 	protected void convertItems(){
@@ -24,12 +22,5 @@ public class PromoCategory extends Category {
 		}
 		return sum;
 	}
-	
-	public ArrayList<PromoItem> getItems() {
-		return items;
-	}
-
-
 	private ArrayList<PromoItem> items;
-
 }
