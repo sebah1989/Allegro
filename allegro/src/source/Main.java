@@ -23,18 +23,20 @@ public class Main {
 		//System.out.println(html.substring(index2,index3));
 	
 		//System.out.println(doc.select("section.category.promotion-category.separator-bottom.transform"));
-		Section promo = new Section(Allegro.getDataFromAllegroWebsite());
+		//PlainSection promo = new PlainSection(Allegro.getDataFromAllegroWebsite());
 		Manager manager = new Manager();
 		manager.start();
+		PromoSection promo = new PromoSection(Allegro.getDataFromAllegroWebsite());
 		//System.out.println(promo.getCategories().get(6).getItems().size());
 		
-	
+		promo.printSection();
+		//System.out.println(promo.getSection().getElementsByTag("li"));
 		String html = "<html><head><title>Some title</title></head><body><div class='category' data-category-main='false' data-category-id='100008'>"
 				+ "<h3>Nowe oferty</h3><li class=''><div class='price-container clearfix'><span class='price bargains-main-color'>"
 				+ "1 499,00 zł</span><del>1 899,00 zł</del></div></li><li class=''></li><li class=''></li></div></body></html>";
 		Document doc = Jsoup.parse(html);
-		Element element = Allegro.getCategoriesFromDocument(doc).first();
-		Item item = new Item(element);
+		//Element element = Allegro.getCategoriesFromDocument(doc).first();
+		//Item item = new Item(element);
 		//System.out.println(item.getPriceBefore() +" "+  item.getPriceAfter());
 		//System.out.println(promo.getElements().size());
 		//Document document = Allegro.getDataFromAllegroWebsite();

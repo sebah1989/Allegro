@@ -2,55 +2,44 @@ package source;
 
 import org.jsoup.nodes.Element;
 
-public class Item {
+public abstract class Item {
 	public Item(Element element){
 		parseDocumentPricesToString(element);
 		convertBeforePrice();
 		convertAfterPrice();
 	}
+	protected abstract void parseDocumentPricesToString(Element element);
 	
-	private void parseDocumentPricesToString(Element element){
-		this.regularPrice = element.getElementsByTag("del").text();
-		this.specialPrice = element.select("span.price.bargains-main-color").text();
-	}
-	
-	private double parseStringPriceToDouble(String price){
-		if(price.isEmpty()){
-			return 0;
-		}
-		//removings spacebars, zł and replacing ',' with '.'
-		price = price.replaceAll(",", ".").replaceAll("zł", "").replaceAll("\\u00a0","").replaceAll("\\s+","");
-		return Double.parseDouble(price);
-	}
-	public void convertBeforePrice(){
-		this.priceBefore = parseStringPriceToDouble(regularPrice);
-	}
-	public void convertAfterPrice(){
-		this.priceAfter = parseStringPriceToDouble(specialPrice);
+	public double getDifferenceBetweenPrices(){
+		return getPriceBefore() - getPriceAfter();
 	}
 	public double getPriceBefore() {
 		return priceBefore;
 	}
-
 	public double getPriceAfter() {
 		return priceAfter;
 	}
-	
-	public String getRegularPrice() {
-		return regularPrice;
+	protected void convertBeforePrice(){
+		this.priceBefore = parseStringPriceToDouble(regularPrice);
 	}
-
-	public String getSpecialPrice() {
-		return specialPrice;
+	protected void convertAfterPrice(){
+		this.priceAfter = parseStringPriceToDouble(specialPrice);
 	}
-
-	public double getDifferenceBetweenPrices(){
-		return getPriceBefore() - getPriceAfter();
+	protected double parseStringPriceToDouble(String price){
+		if(price.isEmpty()){
+			return 0;
+		}
+		//replaceAll("\\u00a0","") sometimes doesn't work, so it is done in while manually
+		while(price.indexOf("\\u00a0") != -1){
+			int index = price.indexOf("\\u00a0");
+			price = price.substring(0, index) + price.substring(index+6);
+		}
+		//removings spacebars, zł and replacing ',' with '.'
+		price = price.replaceAll(",", ".").replaceAll("zł", "").replaceAll("\\s+","").replaceAll("\\u00a0","");
+		return Double.parseDouble(price);
 	}
-
-
-	private double priceBefore;
-	private double priceAfter;
-	private String regularPrice;
-	private String specialPrice;
+	protected double priceBefore;
+	protected double priceAfter;
+	protected String regularPrice;
+	protected String specialPrice;
 }

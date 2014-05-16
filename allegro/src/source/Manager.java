@@ -17,9 +17,9 @@ public class Manager {
 		this.document =  doc;
 	}
 	public void start(){
-		PromotionSection promosection = new PromotionSection(document, "Nowe okazje");
-		promosection.printCategory();
-		Section section = new Section(document);
+		PromoSection promosection = new PromoSection(document);
+		promosection.printSection();
+		PlainSection section = new PlainSection(document);
 		section.printSection();
 
 	}
