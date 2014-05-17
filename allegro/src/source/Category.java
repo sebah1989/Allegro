@@ -20,7 +20,7 @@ public abstract class Category {
 		System.out.format(Locale.FRANCE,"%-10.2f%n",getSumPriceDifferences());
 	}
 	
-	protected String getHeader(){
+	public String getHeader(){
 		return header;
 	}
 	

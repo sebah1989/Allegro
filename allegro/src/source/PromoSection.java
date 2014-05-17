@@ -22,7 +22,7 @@ public class PromoSection extends Section {
 		}
 	}
 	
-	public ArrayList<PromoCategory> getItems(){
+	public ArrayList<PromoCategory> getCategories(){
 		return categories;
 	}
 
