@@ -1,6 +1,8 @@
 package source;
 
+import java.text.NumberFormat;
 import java.util.Locale;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -17,7 +19,10 @@ public abstract class Category {
 	
 	protected void printCategory(){
 		System.out.print(getHeader() +": ");
-		System.out.format(Locale.FRANCE,"%-10.2f%n",getSumPriceDifferences());
+		NumberFormat formator = NumberFormat.getInstance(Locale.FRANCE);
+		formator.setGroupingUsed(true);
+		formator.setMinimumFractionDigits(2);
+		System.out.println(formator.format(getSumPriceDifferences()));
 	}
 	
 	public String getHeader(){

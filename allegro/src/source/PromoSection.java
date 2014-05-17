@@ -11,7 +11,7 @@ public class PromoSection extends Section {
 		convertCategories();
 	}
 	protected void convertCategories(){
-		categories.add(new PromoCategory(section, "Nowe okazje"));
+		categories.add(new PromoCategory(section, "Okazje dnia"));
 	}
 	
 	public void printSection(){
