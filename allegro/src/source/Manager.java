@@ -23,7 +23,6 @@ public class Manager {
 		promosection.printSection();
 		PlainSection section = new PlainSection(document);
 		section.printSection();
-
 	}
 	private Document document;
 }
