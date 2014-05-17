@@ -22,5 +22,10 @@ public class PromoCategory extends Category {
 		}
 		return sum;
 	}
+	
+	public ArrayList<PromoItem> getItems(){
+		return items;
+	}
+
 	private ArrayList<PromoItem> items;
 }

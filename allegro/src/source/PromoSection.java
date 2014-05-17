@@ -8,18 +8,23 @@ import org.jsoup.select.Elements;
 
 public class PromoSection extends Section {
 	public PromoSection(Document document){
-		items = new ArrayList<PromoCategory>();
+		categories = new ArrayList<PromoCategory>();
 		this.section = document.select("section.category.promotion-category.separator-bottom.transform").first();
 		convertCategories();
 	}
 	protected void convertCategories(){
-		items.add(new PromoCategory(section, "Nowe okazje"));
+		categories.add(new PromoCategory(section, "Nowe okazje"));
 	}
 	
 	public void printSection(){
-		for(PromoCategory category : items){
+		for(PromoCategory category : categories){
 			category.printCategory();
 		}
 	}
-	private ArrayList<PromoCategory> items;
+	
+	public ArrayList<PromoCategory> getItems(){
+		return categories;
+	}
+
+	private ArrayList<PromoCategory> categories;
 }

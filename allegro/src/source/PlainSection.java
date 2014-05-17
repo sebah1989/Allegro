@@ -25,6 +25,10 @@ public class PlainSection extends Section{
 			category.printCategory();
 		}
 	}
+	
+	public ArrayList<PlainCategory> getCategories(){
+		return categories;
+	}
 
 	private ArrayList<PlainCategory> categories;
 	private Elements notConvertedCategories;

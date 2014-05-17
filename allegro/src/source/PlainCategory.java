@@ -25,5 +25,9 @@ public class PlainCategory extends Category {
 		return sum;
 	}
 	
+	public ArrayList<PlainItem> getItems(){
+		return items;
+	}
+
 	private ArrayList<PlainItem> items;
 }
